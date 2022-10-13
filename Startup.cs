@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ReSell.Models;
 
 namespace ReSell
 {
@@ -34,6 +35,11 @@ namespace ReSell
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddDbContext<ReSellContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddRouting(options =>
+            {
+                options.LowercaseUrls = true; options.AppendTrailingSlash = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
